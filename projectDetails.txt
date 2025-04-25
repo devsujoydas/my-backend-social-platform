@@ -1,0 +1,9 @@
+target: User login register korte parbe & post likhte + korte parbe 
+
+  step
+    |
+    |-login & register
+    |-logout
+    |-post creation
+    |-post like 
+    |-post delete
