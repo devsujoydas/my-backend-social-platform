@@ -52,6 +52,7 @@ app.post("/register", async (req, res) => {
     })
 })
 
+
 app.post("/login", async (req, res) => {
     let { email, password } = req.body;
 
@@ -97,24 +98,25 @@ app.post("/post", isLoggedIn, async (req, res) => {
 app.get("/like/:id", isLoggedIn, async (req, res) => {
     let post = await postModel.findOne({ _id: req.params.id }).populate("user");
     let userId = req.user.userid;
-
     if (post.likes.indexOf(userId) === -1) {
         post.likes.push(userId)
     }
-
     else {
         post.likes.splice(post.likes.indexOf(userId), 1)
     }
-
     await post.save();
     res.redirect("/profile")
 })
 
 app.get("/edit/:id", isLoggedIn, async (req, res) => {
     let post = await postModel.findOne({ _id: req.params.id }).populate("user");
-
+    let updatedPost = postModel.findOneAndUpdate({post.content})
     res.render("edit", { post })
 })
+
+
+
+
 
 
 function isLoggedIn(req, res, next) {
@@ -127,7 +129,6 @@ function isLoggedIn(req, res, next) {
         next()
     }
 }
-
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
