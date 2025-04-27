@@ -110,7 +110,12 @@ app.get("/like/:id", isLoggedIn, async (req, res) => {
 
 app.get("/edit/:id", isLoggedIn, async (req, res) => {
     let post = await postModel.findOne({ _id: req.params.id }).populate("user");
-    let updatedPost = postModel.findOneAndUpdate({post.content})
+ 
+    res.render("edit", { post })
+})
+app.post("/edit/:id", isLoggedIn, async (req, res) => {
+    let post = await postModel.findOne({ _id: req.params.id }).populate("user");
+ 
     res.render("edit", { post })
 })
 

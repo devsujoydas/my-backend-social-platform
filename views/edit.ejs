@@ -25,45 +25,43 @@
 
     <div class=" md:max-w-96 md:mx-auto border border-zinc-700 p-5">
 
-        <a href="/profile"
-            class="text-green-500 md:p-0 p-5 inline-block hover:text-green-600 transition-all mb-2 inlineflex justify-center items-center -block"><--Back
-                to Profile </a>
-                <div>
-                    <!-- post image -->
-                    <div class="max-h-[600px] overflow-hidden">
-                        <img class="w-full " src="<%= post.postImage %>" alt="">
-                    </div>
-                    <!-- post content -->
-                    <div class="p-2">
-                        <p class="text-wrap">
-                            <%= post.content %>
-                        </p>
-                    </div>
+<a href="/profile"
+class="text-green-500 md:p-0 p-5 inline-block hover:text-green-600 transition-all mb-2 inlineflex justify-center items-center -block"><--Back
+    to Profile </a>
+    <div>
+        <!-- post image -->
+        <div class="max-h-[600px] overflow-hidden">
+            <img class="w-full " src="<%= post.postImage %>" alt="">
+        </div>
+        <!-- post content -->
+        <div class="p-2">
+            <p class="text-wrap">
+                <%= post.content %>
+            </p>
+        </div>
 
-                </div>
-
-
-
-
-
-                <!-- Edit Post Form -->
-                <div class="border border-zinc-700 p-3 rounded-md space-y-2">
-
-                    <h1>Edit your post</h1>
-
-                    <form class="grid gap-3 " method="post" action="/edit/<%= post._id %>">
-                        <input type="text" name="postImage" placeholder="New Image Url"
-                            class="border border-zinc-700 outline-none px-4 py-3 rounded-md" required>
-                        <input type="text" name="content" placeholder="Write New Contenct ?"
-                            class="border border-zinc-700 outline-none px-4 py-3 rounded-md" required>
-
-                        <input
-                            class="bg-blue-500 hover:bg-blue-600 px-4 py-2 active:scale-95  rounded-md cursor-pointer transition-all"
-                            type="submit" value="Update Post">
-                    </form>
-
-                </div>
     </div>
+
+
+
+    <!-- Edit Post Form -->
+    <div class="border border-zinc-700 p-3 rounded-md space-y-2">
+
+        <h1>Edit your post</h1>
+
+        <form class="grid gap-3 " method="post" action="/update/<%= post._id %>">
+            <input type="text" name="postImage" placeholder="New Image Url"
+                class="border border-zinc-700 outline-none px-4 py-3 rounded-md" required>
+            <input type="text" name="content" placeholder="Write New Contenct ?"
+                class="border border-zinc-700 outline-none px-4 py-3 rounded-md" required>
+
+            <input
+                class="bg-blue-500 hover:bg-blue-600 px-4 py-2 active:scale-95  rounded-md cursor-pointer transition-all"
+                type="submit" value="Update Post">
+        </form>
+
+    </div>
+</div>
 </body>
 
 </html>
