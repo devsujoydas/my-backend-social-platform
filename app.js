@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 const userModel = require('./models/user');
 const postModel = require('./models/post');
-const multerconfig = require('./config/multerconfig');
+const upload = require('./config/multerconfig');
 
 
 
@@ -58,10 +58,20 @@ app.get("/edit/:id", isLoggedIn, async (req, res) => {
 
     res.render("edit", { post })
 })
+
 app.get("/profile/upload", (req, res) => {
     res.render("profileupload")
 })
 
+app.post("/uploadpp", isLoggedIn, upload.single("image"), async (req, res) => {
+
+    let user = await userModel.findOne({ email: req.user.email })
+    user.profilepic = req.file.filename;
+    await user.save();
+    res.redirect("/profile")
+
+
+})
 
 
 
