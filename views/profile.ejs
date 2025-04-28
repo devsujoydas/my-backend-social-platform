@@ -52,7 +52,7 @@
                         <!-- Profile info -->
                         <div class="flex flex-col justify-center items-center gap-5">
                             <div class="w-40 h-40 rounded-full overflow-hidden">
-                                <img class="w-full" src="<%= user.image %>" alt="">
+                                <img class="w-full" src="/images/<%= user.profilepic%>" alt="">
                             </div>
                             <div class="space-y-1 text-center  ">
                                 <p>
@@ -71,7 +71,7 @@
                         <!-- Profile Update Delete -->
                         <div class="grid gap-2 text-xs">
 
-                            <a href="/test"
+                            <a href="/profile/upload"
                                 class=" bg-emerald-600 hover:bg-emerald-700 px-4 py-2 active:scale-95 rounded-md cursor-pointer transition-all">Edit
                                 Profile</a>
                             <form action="/logout" method="post">

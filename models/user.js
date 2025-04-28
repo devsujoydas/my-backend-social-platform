@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(`mongodb://127.0.0.1:27017/miniauthproject`)
+mongoose.connect(`mongodb://127.0.0.1:27017/mini-p1-data-association`)
 
 
 const userSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
     username: String,
-    image: String,
+    profilepic: {
+        type: String,
+        default: "default.jpg"
+    },
     phone: Number,
     email: String,
     password: String,
