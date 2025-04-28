@@ -9,8 +9,6 @@ const userModel = require('./models/user');
 const postModel = require('./models/post');
 const upload = require('./config/multerconfig');
 
-
-
 const app = express()
 const port = process.env.PORT || 5000;
 
@@ -25,38 +23,36 @@ app.use(express.static(path.join(__dirname, "public")))
 
 
 
-
-
+// all get and render pages
 app.get("/", async (req, res) => {
-    let user = await userModel.findOne()
-    res.render("index", { user })
+    res.render("index")
 })
+
 app.get("/signup", (req, res) => {
     res.render("signup")
 })
+
 app.get("/login", (req, res) => {
     res.render("login")
 })
+
 app.get("/profile", isLoggedIn, async (req, res) => {
     let user = await userModel.findOne({ email: req.user.email }).populate("posts");
     res.render("profile", { user })
 })
+
 app.get("/like/:id", isLoggedIn, async (req, res) => {
     let post = await postModel.findOne({ _id: req.params.id }).populate("user");
     let userId = req.user.userid;
-    if (post.likes.indexOf(userId) === -1) {
-        post.likes.push(userId)
-    }
-    else {
-        post.likes.splice(post.likes.indexOf(userId), 1)
-    }
+    if (post.likes.indexOf(userId) === -1) { post.likes.push(userId) }
+    else { post.likes.splice(post.likes.indexOf(userId), 1) }
     await post.save();
     res.redirect("/profile")
 })
+
 app.get("/edit/:id", isLoggedIn, async (req, res) => {
     let post = await postModel.findOne({ _id: req.params.id }).populate("user");
-
-    res.render("edit", { post })
+    res.render("postEdit", { post })
 })
 
 app.get("/profile/upload", (req, res) => {
@@ -64,13 +60,10 @@ app.get("/profile/upload", (req, res) => {
 })
 
 app.post("/uploadpp", isLoggedIn, upload.single("image"), async (req, res) => {
-
     let user = await userModel.findOne({ email: req.user.email })
     user.profilepic = req.file.filename;
     await user.save();
     res.redirect("/profile")
-
-
 })
 
 
