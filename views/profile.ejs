@@ -17,10 +17,21 @@
         rel="stylesheet">
 
     <style>
-        * {box-sizing: border-box;}
-        .font-poppins {font-family: "Poppins", sans-serif;}
-        .editbtn{display: none;}
-        .editbox:hover .editbtn{display: flex;}
+        * {
+            box-sizing: border-box;
+        }
+
+        .font-poppins {
+            font-family: "Poppins", sans-serif;
+        }
+
+        .editbtn {
+            display: none;
+        }
+
+        .editbox:hover .editbtn {
+            display: flex;
+        }
     </style>
 </head>
 
@@ -30,130 +41,129 @@
         class="text-green-500 md:p-0 p-5 hover:text-green-600 transition-all mb-5 inlineflex justify-center items-center -block"><--Back
             to home </a>
 
-    <div class=" grid md:grid-cols-2 gap-5 md:max-w-7xl md:mx-auto">
+            <div class=" grid md:grid-cols-2 gap-5 md:max-w-7xl md:mx-auto">
 
-        <!-- Profile form Container-->
-        <div class="md:sticky md:top-0 grid gap-5 md:mx-0 mx-5 md:max-h-[500px]">
-            <!-- Profile Container-->
-            <div class="border flex justify-between items-start border-zinc-700 p-8 rounded-md ">
-                <!-- Profile -->
-                <h1 class="text-3xl ">Profile</h1>
-                <!-- Profile info -->
-                <div class="flex flex-col justify-center items-center gap-5">
-                    <div class="w-40 h-40 rounded-full overflow-hidden">
-                        <img class="w-full" src="<%= user.image %>" alt="">
+                <!-- Profile form Container-->
+                <div class="md:sticky md:top-0 grid gap-5 md:mx-0 mx-5 md:max-h-[500px]">
+                    <!-- Profile Container-->
+                    <div class="border flex justify-between items-start border-zinc-700 p-8 rounded-md ">
+                        <!-- Profile -->
+                        <h1 class="text-3xl ">Profile</h1>
+                        <!-- Profile info -->
+                        <div class="flex flex-col justify-center items-center gap-5">
+                            <div class="w-40 h-40 rounded-full overflow-hidden">
+                                <img class="w-full" src="<%= user.image %>" alt="">
+                            </div>
+                            <div class="space-y-1 text-center  ">
+                                <p>
+                                    <%= user.firstName %>
+                                        <%= user.lastName %>
+                                </p>
+                                <p>@<%= user.username %>
+                                </p>
+                                <p>
+                                    <%= user.email %>
+                                </p>
+                                <p>0<%= user.phone %>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Profile Update Delete -->
+                        <div class="grid gap-2 text-xs">
+
+                            <a href="/test"
+                                class=" bg-emerald-600 hover:bg-emerald-700 px-4 py-2 active:scale-95 rounded-md cursor-pointer transition-all">Edit
+                                Profile</a>
+                            <form action="/logout" method="post">
+                                <input
+                                    class=" bg-orange-500 hover:bg-orange-600 w-full py-2 active:scale-95 rounded-md cursor-pointer transition-all"
+                                    type="submit" value="Logout">
+                            </form>
+                        </div>
                     </div>
-                    <div class="space-y-1 text-center  ">
-                        <p>
-                            <%= user.firstName %>
-                                <%= user.lastName %>
-                        </p>
-                        <p>@<%= user.username %>
-                        </p>
-                        <p>
-                            <%= user.email %>
-                        </p>
-                        <p>0<%= user.phone %>
-                        </p>
-                    </div>
-                </div>
-                <!-- Profile Update Delete -->
-                <div class="grid gap-2 text-xs">
-                    <form action="/profile/edit" method="post" class="">
-                        <input
-                            class=" bg-emerald-600 hover:bg-emerald-700 px-4 py-2 active:scale-95 rounded-md cursor-pointer transition-all"
-                            type="submit" value="Edit Profile">
-                    </form>
-                    <form action="/logout" method="post">
-                        <input
-                            class=" bg-orange-500 hover:bg-orange-600 w-full py-2 active:scale-95 rounded-md cursor-pointer transition-all"
-                            type="submit" value="Logout">
-                    </form>
-                </div>
-            </div>
 
-            <!-- Create Post Form -->
-            <div class="border border-zinc-700 p-8 rounded-md space-y-2">
+                    <!-- Create Post Form -->
+                    <div class="border border-zinc-700 p-8 rounded-md space-y-2">
 
-                <h1>You can create a new post</h1>
+                        <h1>You can create a new post</h1>
 
-                <form class="grid gap-3 " method="post" action="/post">
-                    <input type="text" name="postImage" placeholder="Post Image Url"
-                        class="border border-zinc-700 outline-none px-4 py-3 rounded-md" required>
-                    <input type="text" name="content" placeholder="What's on your mind ?"
-                        class="border border-zinc-700 outline-none px-4 py-3 rounded-md" required>
+                        <form class="grid gap-3 " method="post" action="/post">
+                            <input type="text" name="postImage" placeholder="Post Image Url"
+                                class="border border-zinc-700 outline-none px-4 py-3 rounded-md" required>
+                            <input type="text" name="content" placeholder="What's on your mind ?"
+                                class="border border-zinc-700 outline-none px-4 py-3 rounded-md" required>
 
-                    <!-- <textarea class="border border-zinc-700 outline-none px-4 py-3 rounded-md" name="content"
+                            <!-- <textarea class="border border-zinc-700 outline-none px-4 py-3 rounded-md" name="content"
                 placeholder="What's on your mind ?"></textarea> -->
 
-                    <input
-                        class="bg-blue-500 hover:bg-blue-600 px-4 py-2 active:scale-95  rounded-md cursor-pointer transition-all"
-                        type="submit" value="Create New Post">
-                </form>
+                            <input
+                                class="bg-blue-500 hover:bg-blue-600 px-4 py-2 active:scale-95  rounded-md cursor-pointer transition-all"
+                                type="submit" value="Create New Post">
+                        </form>
 
-            </div>
-        </div>
-
-        <!-- Post Container -->
-        <div class=" border w-full border-zinc-700 md:p-8  p-5 rounded-md space-y-3">
-            <h1 class="text-2xl">Posts</h1>
-            <div class="postconatainer grid gap-5">
-            <% user.posts.reverse().forEach((post)=>{ %>
-
-                <!-- post -->
-                <div class="border border-zinc-600 bg-[#252728] rounded-md">
-                    <!-- post author -->
-                    <div class="flex justify-between item p-2">
-                        <div class="flex items-center gap-2 ">
-                            <div class="w-12 h-12 rounded-full overflow-hidden">
-                                <img class="w-full cursor-pointer active:scale-105" src="<%= user.image %>"
-                                    alt="">
-                            </div>
-                            <div>
-                                <p class="text-[16px] hover:underline transition-all cursor-pointer">@<%=
-                                        user.username %>
-                                </p>
-                                <p class="text-[10px]">
-                                    <%= post.date %>
-                                </p>
-                            </div>
-                        </div>
-                        <div aria-colspan="editbox" class="-mt-2 mr-2">
-                            <a id="threedot" class="text-2xl" href="/edit/<%= post._id %>"">...</a>
-                            <h1 id="editbtn" class="text-xs hidden">Edit</h1>
-                        </div>
-                    </div>
-                    <!-- post content -->
-                    <div class="p-2">
-                        <p class="text-wrap">
-                            <%= post.content %>
-                        </p>
-                    </div>
-                    <!-- post image -->
-                    <div class="max-h-[600px] overflow-hidden">
-                        <img class="w-full " src="<%= post.postImage %>" alt="">
-                    </div>
-                    <div class="p-2">
-                        <p>
-                            <%= post.likes.length %> Likes
-                        </p>
-                    </div>
-                    <!-- Like Comment Share -->
-                    <div class="flex justify-evenly gap-2 items-center border-t border-zinc-500 mx-2 py-2">
-                        <a href="/like/<%= post._id %>"
-                            class="flex justify-center items-center border text-blue-500 border-zinc-600 hover:bg-[#0a1218] cursor-pointer active:scale-95 transition-all w-full py-2 rounded-md font-semibold">
-                            <%= post.likes.indexOf(user._id)===-1 ? "Like" : "Unlike" %>
-                        </a>
-                        <a href="/profile"
-                            class="flex justify-center items-center border border-zinc-600 hover:bg-[#0a1218] cursor-pointer active:scale-95 transition-all w-full py-2 rounded-md ">Comment</a>
-                        <a href="/profile"
-                            class="flex justify-center items-center border border-zinc-600 hover:bg-[#0a1218] cursor-pointer active:scale-95 transition-all w-full py-2 rounded-md ">Share</a>
                     </div>
                 </div>
-                <% }) %>
+
+                <!-- Post Container -->
+                <div class=" border w-full border-zinc-700 md:p-8  p-5 rounded-md space-y-3">
+                    <h1 class="text-2xl">Posts</h1>
+                    <div class="postconatainer grid gap-5">
+                        <% user.posts.reverse().forEach((post)=>{ %>
+
+                            <!-- post -->
+                            <div class="border border-zinc-600 bg-[#252728] rounded-md">
+                                <!-- post author -->
+                                <div class="flex justify-between item p-2">
+                                    <div class="flex items-center gap-2 ">
+                                        <div class="w-12 h-12 rounded-full overflow-hidden">
+                                            <img class="w-full cursor-pointer active:scale-105" src="<%= user.image %>"
+                                                alt="">
+                                        </div>
+                                        <div>
+                                            <p class="text-[16px] hover:underline transition-all cursor-pointer">@<%=
+                                                    user.username %>
+                                            </p>
+                                            <p class="text-[10px]">
+                                                <%= post.date %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div aria-colspan="editbox" class="-mt-2 mr-2">
+                                        <a id="threedot" class="text-2xl" href="/edit/<%= post._id %>"">...</a>
+                            <h1 id=" editbtn" class="text-xs hidden">Edit</h1>
+                                    </div>
+                                </div>
+                                <!-- post content -->
+                                <div class="p-2">
+                                    <p class="text-wrap">
+                                        <%= post.content %>
+                                    </p>
+                                </div>
+                                <!-- post image -->
+                                <div class="max-h-[600px] overflow-hidden">
+                                    <img class="w-full " src="<%= post.postImage %>" alt="">
+                                </div>
+                                <div class="p-2">
+                                    <p>
+                                        <%= post.likes.length %> Likes
+                                    </p>
+                                </div>
+                                <!-- Like Comment Share -->
+                                <div class="flex justify-evenly gap-2 items-center border-t border-zinc-500 mx-2 py-2">
+                                    <a href="/like/<%= post._id %>"
+                                        class="flex justify-center items-center border text-blue-500 border-zinc-600 hover:bg-[#0a1218] cursor-pointer active:scale-95 transition-all w-full py-2 rounded-md font-semibold">
+                                        <%= post.likes.indexOf(user._id)===-1 ? "Like" : "Unlike" %>
+                                    </a>
+                                    <a href="/profile"
+                                        class="flex justify-center items-center border border-zinc-600 hover:bg-[#0a1218] cursor-pointer active:scale-95 transition-all w-full py-2 rounded-md ">Comment</a>
+                                    <a href="/profile"
+                                        class="flex justify-center items-center border border-zinc-600 hover:bg-[#0a1218] cursor-pointer active:scale-95 transition-all w-full py-2 rounded-md ">Share</a>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 </body>
 
 </html>

@@ -5,6 +5,10 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const path = require('path');
 
+const crypto = require('crypto');
+const multer = require('multer')
+
+
 const userModel = require('./models/user');
 const postModel = require('./models/post');
 
@@ -20,6 +24,29 @@ app.use(express.static(path.join(__dirname, "public")))
 
 
 
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/images/uploads')
+    },
+    filename: function (req, file, cb) {
+        crypto.randomBytes(12, (err, bytes) => {
+            const fn = bytes.toString('hex') + path.extname(file.originalname)
+            cb(null, fn)
+        })
+    }
+})
+
+const upload = multer({ storage: storage })
+
+app.post("/uploadfile", upload.single('image'), (req, res) => {
+    console.log(req.file);
+    res.redirect("/test")
+})
+
+
+
 app.get("/", async (req, res) => {
     let user = await userModel.findOne()
     res.render("index", { user })
@@ -30,6 +57,11 @@ app.get("/signup", (req, res) => {
 app.get("/login", (req, res) => {
     res.render("login")
 })
+app.get("/test", (req, res) => {
+    res.render("test")
+})
+
+
 
 
 
@@ -76,7 +108,6 @@ app.post("/logout", (req, res) => {
     res.redirect("/login")
 })
 
-
 app.get("/profile", isLoggedIn, async (req, res) => {
     let user = await userModel.findOne({ email: req.user.email }).populate("posts");
     res.render("profile", { user })
@@ -120,11 +151,6 @@ app.post("/update/:id", isLoggedIn, async (req, res) => {
 
     res.redirect("/profile")
 })
-
-
-
-
-
 
 function isLoggedIn(req, res, next) {
     if (req.cookies.token === "") {
