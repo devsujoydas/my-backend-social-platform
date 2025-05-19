@@ -20,9 +20,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, "public")))
 
 
-
-
-
 // all get and render pages
 app.get("/", async (req, res) => {
     res.render("index")
